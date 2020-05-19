@@ -1,6 +1,18 @@
 #include <stdio.h>
 
-int main() { printf("hellow world\n"); 
+#include "InputFile.h"
 
-printf("visual studio commit\n");
+int main() {
+    printf("group_photo start\n");
+
+    // 写真ファイルの入ったフォルダの入力
+    InputFile();
+
+    // 出力ディレクトリへ写真ファイルのコピー
+
+    // ファイルのリネーム
+
+    // ファイルパスの構造化
+
+    return 0;
 }
