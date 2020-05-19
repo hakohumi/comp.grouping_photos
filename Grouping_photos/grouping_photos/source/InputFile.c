@@ -11,12 +11,12 @@
 extern int errno;
 
 void InputFile() {
-    char* fileName = "in_test.txt";
+    char* fileName = "grouping_photos/resource/in_test.txt";
 #ifdef DEBUG
     printf("\nInputFile() in\n");
 #endif
 
-    printf("filename = %s\n", fileName);
+    printf("入力ディレクトリ：%s\n", fileName);
     printf("GetFileSize() = %d\n", GetFileSize(fileName));
 
 #ifdef DEBUG

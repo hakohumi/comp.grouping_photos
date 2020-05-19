@@ -1,6 +1,7 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 
 #include "InputFile.h"
+
 
 int main() {
     printf("group_photo start\n");

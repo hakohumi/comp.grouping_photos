@@ -37,6 +37,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="grouping_photos\header\in_test.txt" />
+    <Text Include="grouping_photos\in_test.txt">
+      <Filter>リソース ファイル</Filter>
+    </Text>
+    <Text Include="grouping_photos\resource\in_test.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertySheet.props" />
   </ItemGroup>
 </Project>

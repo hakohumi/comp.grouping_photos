@@ -1,6 +1,7 @@
-
+﻿#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
+#include <string.h>
 #include <sys/stat.h>
 
 #include "DEBUG.h"
@@ -11,20 +12,23 @@
 int GetFileSize(char *FileName) {
     struct stat stbuf;
     int fsize = 0;
-    int fError = 0;
-
     FILE *fp;
 
 #ifdef DEBUG
     printf("GetFileSize start\n");
+    printf("FileName = %s\n", FileName);
 #endif
 
-    fError = fopen_s(&fp, &FileName, "r");
+    // fError = fopen_s(&fp, FileName, "r");
+    fp = fopen(FileName, "r");
 
-    printf("fError = %d\n", fError);
+    if (fp == NULL) {
+        printf("fp NULL\n");
+    }
 
     /* ファイルサイズを調査 */
     if (stat(FileName, &stbuf) == -1) {
+        printf(" stat() == -1\n");
         return -1;
     }
 
