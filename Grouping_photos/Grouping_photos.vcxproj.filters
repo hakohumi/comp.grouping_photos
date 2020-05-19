@@ -21,10 +21,22 @@
     <ClCompile Include="grouping_photos\source\InputFile.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="grouping_photos\source\GetFileSize.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="grouping_photos\header\InputFile.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="grouping_photos\header\DEBUG.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="grouping_photos\header\GetFileSize.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="grouping_photos\header\in_test.txt" />
   </ItemGroup>
 </Project>
