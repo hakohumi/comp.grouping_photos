@@ -5,19 +5,21 @@
 #include <errno.h>
 #define DEBUG
 
-#include "GetFileSize.h"
+#include "GetFileInfo.h"
 
 //* -------------------------------------------------- */
-extern int errno;
 
-void InputFile() {
-    char* fileName = "grouping_photos/resource/in_test.txt";
-#ifdef DEBUG
+void InputFile()
+{
+    const char *i_fileName = "grouping_photos/resource/in_test.txt";
+
     printf("\nInputFile() in\n");
-#endif
 
-    printf("入力ディレクトリ：%s\n", fileName);
-    printf("GetFileSize() = %d\n", GetFileSize(fileName));
+    printf("入力ディレクトリ：%s\n", i_fileName);
+    printf("GetFileSize() = %d\n", GetFileSize(i_fileName));
+
+    // ファイル名変更テスト
+    //rename(i_fileName, "grouping_photos/resource/test2.txt");
 
 #ifdef DEBUG
     printf("\nInputFile() out\n");

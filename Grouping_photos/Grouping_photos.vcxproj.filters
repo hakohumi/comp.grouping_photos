@@ -21,7 +21,7 @@
     <ClCompile Include="grouping_photos\source\InputFile.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="grouping_photos\source\GetFileSize.c">
+    <ClCompile Include="grouping_photos\source\GetFileInfo.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClInclude Include="grouping_photos\header\DEBUG.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="grouping_photos\header\GetFileSize.h">
+    <ClInclude Include="grouping_photos\header\GetFileInfo.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
