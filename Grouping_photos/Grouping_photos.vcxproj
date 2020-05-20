@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="grouping_photos\copyfunc\ControlFile.c" />
-    <ClCompile Include="grouping_photos\inputfunc\Directory.c" />
     <ClCompile Include="grouping_photos\source\grouping_photos.c" />
   </ItemGroup>
   <ItemGroup>

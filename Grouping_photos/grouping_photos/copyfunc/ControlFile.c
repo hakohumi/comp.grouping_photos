@@ -1,18 +1,22 @@
-﻿#include "ControlFIle.h"
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include "ControlFile.h"
 
 #include <Windows.h>
 #include <assert.h>
 #include <errno.h>
+#include <io.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <time.h>
 
 #include "DEBUG.h"
 
 #define DEBUG
 
+static int copyFilefopen(FileName i_fileName, FileName o_fileName);
 //* -------------------------------------------------- */
 
 void InputFile(FileName i_fileName) {
@@ -116,11 +120,11 @@ static int copyFilefopen(FileName i_fileName, FileName o_fileName) {
         }
     }
 
-    return result;
-
 #ifdef DEBUG
     printf("\nControlFile.copyFilefopen() end\n\n");
 #endif
+
+    return result;
 }
 
 // ファイルのサイズを取得する関数
@@ -165,3 +169,38 @@ static int myGetFileSize(FileName i_fileName) {
 
 // ファイルの名前を変更する
 // int RenameFileName(FileName i_oldFileName, FileName i_)
+
+void structured_path(FileName i_fileName) {}
+
+void getFileCreateTime(FileName i_fileName, char * o_fileName) {
+    struct _finddata_t l_fData;
+    struct tm *l_createTime;
+    char l_yearChar[5];
+    char l_monthChar[3];
+    char l_dayChar[3];
+
+    // 20200520_001
+    char l_formatedName[13];
+    int l_num = 0;
+
+    int fh = _findfirst(i_fileName, &l_fData);
+    _findclose(fh);
+    printf("作成    : %s", asctime(localtime(&l_fData.time_create)));
+    printf("time = %s\n", ctime(&l_fData.time_create));
+    l_createTime = localtime(&l_fData.time_create);
+    printf("create_day = %d\n", l_createTime->tm_mday);
+    printf("create_month = %d\n", l_createTime->tm_mon + 1);
+    printf("create_year = %d\n", l_createTime->tm_year + 1900);
+    _itoa_s(l_createTime->tm_mday, l_monthChar, 3, 10);
+    printf("time string = %s\n", l_monthChar);
+
+    _itoa_s((l_createTime->tm_year + 1900), l_yearChar, 5, 10);
+    _itoa_s(l_createTime->tm_mon + 1, l_monthChar, 3, 10);
+    _itoa_s(l_createTime->tm_mday, l_dayChar, 3, 10);
+
+    sprintf_s(l_formatedName, 13, "%s%s%s_%03d", l_yearChar,
+              l_monthChar, l_dayChar, l_num);
+    printf("%s\n", l_formatedName);
+    
+    strncpy_s(o_fileName,13, l_formatedName, 13);
+}

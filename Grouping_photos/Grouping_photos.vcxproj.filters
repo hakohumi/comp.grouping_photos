@@ -21,9 +21,6 @@
     <ClCompile Include="grouping_photos\copyfunc\ControlFile.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="grouping_photos\inputfunc\Directory.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="grouping_photos\header\DEBUG.h">
