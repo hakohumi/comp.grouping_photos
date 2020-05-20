@@ -1,4 +1,5 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+﻿#include "ControlFIle.h"
+
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h>
@@ -7,14 +8,12 @@
 #include <sys/stat.h>
 
 #include "DEBUG.h"
-#include "ControlFIle.h"
 
 #define DEBUG
 
 //* -------------------------------------------------- */
 
-void InputFile(const char *i_fileName) {
-
+void InputFile(FileName i_fileName) {
     printf("\nInputFile() in\n");
 
     printf("入力ディレクトリ：%s\n", i_fileName);
@@ -28,26 +27,29 @@ void InputFile(const char *i_fileName) {
 #endif
 }
 
-void CopyFile(const char *i_fileName, const char *o_fileName) { return; }
+void CopyFile(FileName i_fileName, FileName o_fileName) { return; }
 
 // ファイルのサイズを取得する関数
 // 引数：ファイルポインタ
 // 戻り値：ファイルサイズ(int)
-int GetFileSize(const char *i_fileName) {
+int GetFileSize(FileName i_fileName) {
     struct stat l_stBuf;
     int l_fSize = 0;
-    FILE *fp;
+    FILE* fp;
+    // errno_t fError;
+    int fError;
 
 #ifdef DEBUG
     printf("GetFileSize start\n");
     printf("FileName = %s\n", i_fileName);
 #endif
 
-    // fError = fopen_s(&fp, i_fileName, "r");
-    fp = fopen(i_fileName, "r");
+    fError = fopen_s(&fp, i_fileName, "r");
+    // fp = fopen(i_fileName, "r");
 
     if (fp == NULL) {
         printf("fp NULL\n");
+        printf("fError = %d\n", fError);
     }
 
     /* ファイルサイズを調査 */
