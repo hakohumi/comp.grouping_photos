@@ -24,9 +24,9 @@
     <ClCompile Include="grouping_photos\source\InputFile.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="grouping_photos\header\ControlFile.h" />
     <ClInclude Include="grouping_photos\header\DEBUG.h" />
     <ClInclude Include="grouping_photos\header\GetFileInfo.h" />
-    <ClInclude Include="grouping_photos\header\InputFile.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="grouping_photos\in_test.txt" />
