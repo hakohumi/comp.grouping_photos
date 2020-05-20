@@ -43,6 +43,7 @@ int ScanFile(char* i_dir, int i_countFile, char* i_fileName) {
                     // 指定回数分検索し終えたら、
                     if (l_countFile == i_countFile) {
                         sprintf_s(i_fileName, N, "%s/%s", i_dir, l_fData.name);
+                        printf("見つけた！\n");
                         return l_countFile;
                     }
                 }

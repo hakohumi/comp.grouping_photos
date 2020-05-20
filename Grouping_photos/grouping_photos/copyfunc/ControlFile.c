@@ -39,7 +39,6 @@ void MyCopyFile(FileName i_fileName, FileName o_fileName) {
     printf("o_fileName = %s\n", o_fileName);
 #endif
 
-    // l_endFlag = CopyFile((LPCTSTR)i_fileName, (LPCTSTR)o_fileName, TRUE);
     l_endFlag = copyFilefopen(i_fileName, o_fileName);
 
     // エラーだったら
