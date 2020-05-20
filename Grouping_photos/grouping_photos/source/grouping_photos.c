@@ -7,14 +7,14 @@
 
 int main()
 {
-    const char* i_fileName = "grouping_photos/resource/in_test.txt";
+    FileName i_fileName = "grouping_photos/resource/in_test.txt";
     printf("group_photo start\n");
 
     // 1つの写真ファイルの入力
     InputFile(i_fileName);
 
     // 出力ディレクトリへ写真ファイルのコピー
-    //CopyFile();
+    CopyFile();
 
     // ファイルのリネーム
 

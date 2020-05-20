@@ -68,4 +68,4 @@ int GetFileSize(const char *i_fileName) {
 }
 
 // ファイルの名前を変更する
-// int RenameFileName(const char* i_oldFileName, const char* i_)
+// int RenameFileName(FileName i_oldFileName, FileName i_)
