@@ -4,18 +4,12 @@
 
 #define N 260
 
-#define EXT_NUM 3
+#define EXT_NUM 5
 #define EXT_LEN 4
 
 int isCorrectExt(const char* i_ext);
 
-static char ext[EXT_NUM][EXT_LEN] = {
-    ".png",
-    ".jpg",
-    ".txt"
-};
-
-
+static char ext[EXT_NUM][EXT_LEN] = {".png", ".jpg", ".txt", ".PNG", ".JPG"};
 
 void ScanFile(char* i_dir) {
     struct _finddata_t l_fData;
@@ -32,10 +26,12 @@ void ScanFile(char* i_dir) {
                 ScanFile(l_path);
             }  // カレントディレクトリと親ディレクトリは除外する
         } else {  // ファイル
-
-            //if (ext ==) printf("filename = %s\n", l_fData.name);
-            printf("file_ext = %s\n", strrchr(l_fData.name, '.'));
+            //もし、対象の拡張子を持ったファイルを見つけたら
+            if (isCorrectExt(strrchr(l_fData.name, '.')) != 0) {
+            }
+#ifdef DEBUG
             printf("filepath = %s%s\n", i_dir, l_fData.name);
+#endif
         }
     } while (_findnext(fh, &l_fData) == 0);
     _findclose(fh);
