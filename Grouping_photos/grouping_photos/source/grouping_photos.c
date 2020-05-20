@@ -33,7 +33,7 @@ int main() {
         MyCopyFile(i_fileName, o_fileName);
 
         // ファイルのリネーム
-        getFileCreateTime(o_fileName, &l_fileName);
+        getFileCreateTime(i_fileName, &l_fileName);
 
         printf("%s \n", l_fileName);
         memset(l_input, 0, N);
