@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "ControlFile.h"
+#include "Rename.h"
 
 // https://programming.pc-note.net/c/file7.html
 
@@ -11,33 +12,47 @@
 int main() {
     int l_countLoop = 0;
     int l_countLoopBlock = 0;
-    FileName i_fileName = "grouping_photos/resource/in_test.txt";
-    FileName i_filePath = "grouping_photos/resource/";
-    FileName o_fileName = "grouping_photos/resource/in_test2.txt";
-    FileName o_filePath = "grouping_photos/resource/";
     char l_fileName[13];
-    char l_input[N];
+    char i_filePath[N];
+    char i_fileName[N];
+    char o_directoryPath[N];
+    char o_fileName[N];
 
-    // memset(l_fileName, 0, N);
+    memset(l_fileName, 0, 13);
+    memset(i_filePath, 0, N);
+    memset(i_fileName, 0, N);
+    memset(o_directoryPath, 0, N);
+    memset(o_fileName, 0, N);
 
     printf("group_photo start\n");
 
-    scanf_s("%s", &l_input, N);
+    printf("出力するディレクトリパスを入力してください\n");
+    scanf_s("%s", &o_directoryPath, N);
+    scanf_s("%s", &o_directoryPath, N);
 
-    while (strncmp(l_input, "end", 3) != 0) {
-        printf("%s\n", i_fileName);
+    printf("入力するファイルパスを入力してください\n");
+    scanf_s("%s", &i_filePath, N);
+
+    while (strncmp(i_filePath, "end", 3) != 0) {
+        printf("%s\n", i_filePath);
+
+        // 入力パス
+
         // 1つの写真ファイルの入力
-        InputFile(i_fileName);
+        InputFile(i_filePath);
 
         // 出力ディレクトリへ写真ファイルのコピー
-        MyCopyFile(i_fileName, o_fileName);
+        MyCopyFile(i_filePath, o_fileName);
 
         // ファイルのリネーム
-        getFileCreateTime(i_fileName, &l_fileName);
+        getFileCreateTime(o_fileName, &l_fileName);
 
         printf("%s \n", l_fileName);
-        memset(l_input, 0, N);
-        scanf_s("%s", &l_input, N);
+
+        memset(i_filePath, 0, N);
+
+        printf("入力するファイルパスを入力してください\n");
+        scanf_s("%s", &i_filePath, N);
     }
 
     // ファイルパスの構造化

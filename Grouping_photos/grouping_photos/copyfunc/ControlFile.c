@@ -79,6 +79,10 @@ static int copyFilefopen(FileName i_fileName, FileName o_fileName) {
     // 今回は、コピー先のファイルはないものとする
     l_errDest = fopen_s(&l_dest, o_fileName, "wb");
 
+    if (l_dest == NULL) {
+        printf("l_dest = null\n");
+    }
+
     if ((l_errSrc != 0) || (l_errDest != 0)) {
         printf("読み込みエラー\n");
         result = 0;
@@ -112,11 +116,17 @@ static int copyFilefopen(FileName i_fileName, FileName o_fileName) {
         if (fclose(l_dest) == EOF) {
             result = 0;
         }
+        else {
+            printf("l_dest close\n");
+        }
     }
 
     if (l_src != NULL) {
         if (fclose(l_src) == EOF) {
             result = 0;
+        }
+        else {
+            printf("l_src close\n");
         }
     }
 
@@ -142,7 +152,7 @@ static int myGetFileSize(FileName i_fileName) {
     printf("FileName = %s\n", i_fileName);
 #endif
 
-    fError = fopen_s(&fp, i_fileName, "r");
+    fError = fopen_s(&fp, i_fileName, "rb");
     // fp = fopen(i_fileName, "r");
 
     if (fp == NULL) {
@@ -171,36 +181,3 @@ static int myGetFileSize(FileName i_fileName) {
 // int RenameFileName(FileName i_oldFileName, FileName i_)
 
 void structured_path(FileName i_fileName) {}
-
-void getFileCreateTime(FileName i_fileName, char * o_fileName) {
-    struct _finddata_t l_fData;
-    struct tm *l_createTime;
-    char l_yearChar[5];
-    char l_monthChar[3];
-    char l_dayChar[3];
-
-    // 20200520_001
-    char l_formatedName[13];
-    int l_num = 0;
-
-    int fh = _findfirst(i_fileName, &l_fData);
-    _findclose(fh);
-    printf("作成    : %s", asctime(localtime(&l_fData.time_create)));
-    printf("time = %s\n", ctime(&l_fData.time_create));
-    l_createTime = localtime(&l_fData.time_create);
-    printf("create_day = %d\n", l_createTime->tm_mday);
-    printf("create_month = %d\n", l_createTime->tm_mon + 1);
-    printf("create_year = %d\n", l_createTime->tm_year + 1900);
-    _itoa_s(l_createTime->tm_mday, l_monthChar, 3, 10);
-    printf("time string = %s\n", l_monthChar);
-
-    _itoa_s((l_createTime->tm_year + 1900), l_yearChar, 5, 10);
-    _itoa_s(l_createTime->tm_mon + 1, l_monthChar, 3, 10);
-    _itoa_s(l_createTime->tm_mday, l_dayChar, 3, 10);
-
-    sprintf_s(l_formatedName, 13, "%s%s%s_%03d", l_yearChar,
-              l_monthChar, l_dayChar, l_num);
-    printf("%s\n", l_formatedName);
-    
-    strncpy_s(o_fileName,13, l_formatedName, 13);
-}

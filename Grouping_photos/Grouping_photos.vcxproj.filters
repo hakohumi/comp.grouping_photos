@@ -21,6 +21,9 @@
     <ClCompile Include="grouping_photos\copyfunc\ControlFile.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="grouping_photos\source\Rename.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="grouping_photos\header\DEBUG.h">
@@ -32,12 +35,16 @@
     <ClInclude Include="grouping_photos\header\Directory.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="grouping_photos\header\Rename.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="grouping_photos\in_test.txt">
       <Filter>リソース ファイル</Filter>
     </Text>
     <Text Include="grouping_photos\resource\in_test.txt" />
+    <Text Include="grouping_photos\resource\in_test2.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PropertySheet.props" />
