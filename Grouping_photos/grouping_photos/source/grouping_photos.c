@@ -17,7 +17,9 @@ int main() {
     // 出力ディレクトリへ写真ファイルのコピー
     // MyCopyFile(i_fileName, o_fileName);
 
+    printf("num = %d\n",ScanNumFile("C:/Users/fuminori.hakoishi/Desktop"));
     ScanFile("C:/Users/fuminori.hakoishi/Desktop");
+    
 
     // ファイルのリネーム
 

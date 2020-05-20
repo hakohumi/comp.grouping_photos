@@ -1,6 +1,7 @@
 #ifndef DIRECTRY_H
 #define DIRECTRY_H
 
-void ScanFile(char* dir);
+void ScanFile(char* i_dir);
+int ScanNumFile(char* i_dir);
 
 #endif
