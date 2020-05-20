@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="grouping_photos\source\ControlFile.c" />
+    <ClCompile Include="grouping_photos\copyfunc\ControlFile.c" />
+    <ClCompile Include="grouping_photos\inputfunc\Directory.c" />
     <ClCompile Include="grouping_photos\source\grouping_photos.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="grouping_photos\header\ControlFile.h" />
     <ClInclude Include="grouping_photos\header\DEBUG.h" />
+    <ClInclude Include="grouping_photos\header\Directory.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="grouping_photos\in_test.txt" />

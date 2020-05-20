@@ -18,7 +18,10 @@
     <ClCompile Include="grouping_photos\source\grouping_photos.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="grouping_photos\source\ControlFile.c">
+    <ClCompile Include="grouping_photos\copyfunc\ControlFile.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="grouping_photos\inputfunc\Directory.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -27,6 +30,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="grouping_photos\header\ControlFile.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="grouping_photos\header\Directory.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
