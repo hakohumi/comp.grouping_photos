@@ -1,20 +1,29 @@
-#include <io.h>
+﻿#include <io.h>
 #include <stdio.h>
 #include <string.h>
 
+#define DEBUG
 #define N 260
 
 #define EXT_NUM 5
-#define EXT_LEN 4
+#define EXT_LEN 5
 
 int isCorrectExt(const char* i_ext);
 
 static char ext[EXT_NUM][EXT_LEN] = {".png", ".jpg", ".txt", ".PNG", ".JPG"};
 
-void ScanFile(char* i_dir) {
+// 引数1：ディレクトリパス
+// 引数2: カウント回数
+// 引数3：ファイルパスを格納する変数ポインタ
+int ScanFile(char* i_dir, int i_countFile, char* i_fileName) {
     struct _finddata_t l_fData;
     int fh;
+    int l_countFile = 0;
     char l_path[N];
+
+    if ((i_fileName == NULL) && (i_countFile != NULL)) {
+        return 0;
+    }
 
     sprintf_s(l_path, N, "%s/*.*", i_dir);
     if ((fh = _findfirst(l_path, &l_fData)) == -1) return;
@@ -23,48 +32,59 @@ void ScanFile(char* i_dir) {
         if (l_fData.attrib & _A_SUBDIR) {  // ディレクトリ
             if (strcmp(l_fData.name, ".") != 0 &&
                 strcmp(l_fData.name, "..") != 0) {
-                ScanFile(l_path);
+                l_countFile += ScanFile(l_path, i_countFile, i_fileName);
             }  // カレントディレクトリと親ディレクトリは除外する
         } else {  // ファイル
             //もし、対象の拡張子を持ったファイルを見つけたら
             if (isCorrectExt(strrchr(l_fData.name, '.')) != 0) {
+                l_countFile++;
+
+                if (i_countFile != NULL) {
+                    // 指定回数分検索し終えたら、
+                    if (l_countFile == i_countFile) {
+                        sprintf_s(i_fileName, N, "%s/%s", i_dir, l_fData.name);
+                        return l_countFile;
+                    }
+                }
             }
 #ifdef DEBUG
             printf("filepath = %s%s\n", i_dir, l_fData.name);
 #endif
         }
-    } while (_findnext(fh, &l_fData) == 0);
-    _findclose(fh);
-}
-
-int ScanNumFile(char* i_dir) {
-    struct _finddata_t l_fData;
-    int fh;
-    int l_count;
-    char l_path[N];
-
-    l_count = 0;
-
-    sprintf_s(l_path, N, "%s/*.*", i_dir);
-    if ((fh = _findfirst(l_path, &l_fData)) == -1) return -1;
-    do {
-        sprintf_s(l_path, N, "%s/%s", i_dir, l_fData.name);
-        if (l_fData.attrib & _A_SUBDIR) {  // ディレクトリ
-            if (strcmp(l_fData.name, ".") != 0 &&
-                strcmp(l_fData.name, "..") != 0) {
-                l_count += ScanNumFile(l_path);
-            }  // カレントディレクトリと親ディレクトリは除外する
-        } else {  // ファイル
-            //もし、対象の拡張子を持ったファイルを見つけたら
-            if (isCorrectExt(strrchr(l_fData.name, '.')) != 0) {
-                l_count++;
-            }
-        }
-    } while (_findnext(fh, &l_fData) == 0);
+    } while ((_findnext(fh, &l_fData) == 0));
     _findclose(fh);
 
-    return l_count;
+    return l_countFile;
 }
+
+// int ScanNumFile(char* i_dir) {
+//     struct _finddata_t l_fData;
+//     int fh;
+//     int l_count;
+//     char l_path[N];
+
+//     l_count = 0;
+
+//     sprintf_s(l_path, N, "%s/*.*", i_dir);
+//     if ((fh = _findfirst(l_path, &l_fData)) == -1) return -1;
+//     do {
+//         sprintf_s(l_path, N, "%s/%s", i_dir, l_fData.name);
+//         if (l_fData.attrib & _A_SUBDIR) {  // ディレクトリ
+//             if (strcmp(l_fData.name, ".") != 0 &&
+//                 strcmp(l_fData.name, "..") != 0) {
+//                 l_count += ScanNumFile(l_path);
+//             }  // カレントディレクトリと親ディレクトリは除外する
+//         } else {  // ファイル
+//             //もし、対象の拡張子を持ったファイルを見つけたら
+//             if (isCorrectExt(strrchr(l_fData.name, '.')) != 0) {
+//                 l_count++;
+//             }
+//         }
+//     } while (_findnext(fh, &l_fData) == 0);
+//     _findclose(fh);
+
+//     return l_count;
+// }
 
 // 拡張子が検索対象に含まれているか
 int isCorrectExt(const char* i_ext) {

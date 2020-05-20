@@ -6,16 +6,21 @@
 
 // https://programming.pc-note.net/c/file7.html
 
+#define N 260
+
 int main() {
     int l_countLoop = 0;
     int l_countLoopBlock = 0;
     FileName i_fileName = "grouping_photos/resource/in_test.txt";
     FileName o_fileName = "grouping_photos/resource/in_test2.txt";
+    char l_fileName[N];
 
     printf("group_photo start\n");
 
     // 入力ディレクトリの検索、対象写真ファイル数取得
-    l_countLoop = ScanNumFile("C:/Users/fuminori.hakoishi/Desktop");
+    // l_countLoop = ScanNumFile("C:/Users/fuminori.hakoishi/Desktop");
+    l_countLoop = ScanFile("C:/Users/fuminori.hakoishi/Desktop", NULL,NULL);
+
     printf("num = %d\n", l_countLoop);
 
     if (l_countLoop > 100) {
@@ -27,7 +32,7 @@ int main() {
     do {
         for (; l_countLoop > 0; l_countLoop--) {
             // 各写真ファイルパス取得、コピー実行
-            // ScanFile("C:/Users/fuminori.hakoishi/Desktop");
+            // ScanFile("C:/Users/fuminori.hakoishi/Desktop", , &l_fileName);
 
 #ifdef DEBUG
             printf("l_countLoop = %d\n", l_countLoop);
