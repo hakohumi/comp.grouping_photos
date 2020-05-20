@@ -16,34 +16,44 @@
 
 #define DEBUG
 
-static int copyFilefopen(FileName i_fileName, FileName o_fileName);
+/* -------------------------------------------------- */
+// static関数用プロトタイプ宣言
+/* -------------------------------------------------- */
+
+static int copyFilefopen(FileName i_filePath, FileName o_filePath);
+
+static char *getFileName(FileName i_filePath);
+
 //* -------------------------------------------------- */
 
-void InputFile(FileName i_fileName) {
+char *InputFile(FileName i_filePath) {
 #ifdef DEBUG
     printf("\nInputFile() in\n\n");
 #endif
-    printf("入力ディレクトリ：%s\n", i_fileName);
-    printf("GetFileSize() = %d\n", myGetFileSize(i_fileName));
+    printf("入力ディレクトリ：%s\n", i_filePath);
+    printf("myGetFileSize() = %d\n", myGetFileSize(i_filePath));
+    printf("fileName = %s\n", getFileName(i_filePath));
 
     // ファイル名変更テスト
-    // rename(i_fileName, "grouping_photos/resource/test2.txt");
+    // rename(i_filePath, "grouping_photos/resource/test2.txt");
 
 #ifdef DEBUG
     printf("\nInputFile() out\n");
 #endif
+
+    return getFileName(i_filePath);
 }
 
-void MyCopyFile(FileName i_fileName, FileName o_fileName) {
+void MyCopyFile(FileName i_filePath, FileName o_filePath) {
     bool l_endFlag = FALSE;
 
 #ifdef DEBUG
     printf("\nControlFile.CopyFile() start\n\n");
-    printf("i_fileName = %s\n", i_fileName);
-    printf("o_fileName = %s\n", o_fileName);
+    printf("i_filePath = %s\n", i_filePath);
+    printf("o_filePath = %s\n", o_filePath);
 #endif
 
-    l_endFlag = copyFilefopen(i_fileName, o_fileName);
+    l_endFlag = copyFilefopen(i_filePath, o_filePath);
 
     // エラーだったら
     if (l_endFlag == FALSE) {
@@ -57,7 +67,7 @@ void MyCopyFile(FileName i_fileName, FileName o_fileName) {
 }
 
 // 戻り値：1 成功, 0 失敗
-static int copyFilefopen(FileName i_fileName, FileName o_fileName) {
+static int copyFilefopen(FileName i_filePath, FileName o_filePath) {
     FILE *l_src = NULL;
     FILE *l_dest = NULL;
     int l_errSrc = 0;
@@ -68,16 +78,16 @@ static int copyFilefopen(FileName i_fileName, FileName o_fileName) {
     printf("\nControlFile.copyFilefopen() start\n\n");
 #endif
 
-    if (strcmp(i_fileName, o_fileName) == 0) {
+    if (strcmp(i_filePath, o_filePath) == 0) {
         printf("入力と出力のファイルパスが一緒です。");
         return 0;
     }
 
     result = 1;
 
-    l_errSrc = fopen_s(&l_src, i_fileName, "rb");
+    l_errSrc = fopen_s(&l_src, i_filePath, "rb");
     // 今回は、コピー先のファイルはないものとする
-    l_errDest = fopen_s(&l_dest, o_fileName, "wb");
+    l_errDest = fopen_s(&l_dest, o_filePath, "wb");
 
     if (l_dest == NULL) {
         printf("l_dest = null\n");
@@ -115,8 +125,7 @@ static int copyFilefopen(FileName i_fileName, FileName o_fileName) {
     if (l_dest != NULL) {
         if (fclose(l_dest) == EOF) {
             result = 0;
-        }
-        else {
+        } else {
             printf("l_dest close\n");
         }
     }
@@ -124,8 +133,7 @@ static int copyFilefopen(FileName i_fileName, FileName o_fileName) {
     if (l_src != NULL) {
         if (fclose(l_src) == EOF) {
             result = 0;
-        }
-        else {
+        } else {
             printf("l_src close\n");
         }
     }
@@ -140,7 +148,7 @@ static int copyFilefopen(FileName i_fileName, FileName o_fileName) {
 // ファイルのサイズを取得する関数
 // 引数：ファイルポインタ
 // 戻り値：ファイルサイズ(int)
-static int myGetFileSize(FileName i_fileName) {
+static int myGetFileSize(FileName i_filePath) {
     struct stat l_stBuf;
     int l_fSize = 0;
     FILE *fp;
@@ -149,11 +157,11 @@ static int myGetFileSize(FileName i_fileName) {
 
 #ifdef DEBUG
     printf("\nGetFileSize() start\n");
-    printf("FileName = %s\n", i_fileName);
+    printf("FileName = %s\n", i_filePath);
 #endif
 
-    fError = fopen_s(&fp, i_fileName, "rb");
-    // fp = fopen(i_fileName, "r");
+    fError = fopen_s(&fp, i_filePath, "rb");
+    // fp = fopen(i_filePath, "r");
 
     if (fp == NULL) {
         printf("fp NULL\n");
@@ -161,7 +169,7 @@ static int myGetFileSize(FileName i_fileName) {
     }
 
     /* ファイルサイズを調査 */
-    if (stat(i_fileName, &l_stBuf) == -1) {
+    if (stat(i_filePath, &l_stBuf) == -1) {
         printf(" stat() == -1\n");
         return -1;
     }
@@ -180,4 +188,10 @@ static int myGetFileSize(FileName i_fileName) {
 // ファイルの名前を変更する
 // int RenameFileName(FileName i_oldFileName, FileName i_)
 
-void structured_path(FileName i_fileName) {}
+void structured_path(FileName i_filePath) {}
+
+char *getFileName(FileName i_filePath) {
+    // 入力されたフルファイルパスから、
+    // 後ろからスラッシュまでの文字列を取得する
+    return strrchr(i_filePath, '\\');
+}
