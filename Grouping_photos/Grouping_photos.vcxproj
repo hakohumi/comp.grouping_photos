@@ -20,13 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="grouping_photos\source\ControlFile.c" />
-    <ClCompile Include="grouping_photos\source\GetFileInfo.c" />
     <ClCompile Include="grouping_photos\source\grouping_photos.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="grouping_photos\header\ControlFile.h" />
     <ClInclude Include="grouping_photos\header\DEBUG.h" />
-    <ClInclude Include="grouping_photos\header\GetFileInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="grouping_photos\in_test.txt" />
