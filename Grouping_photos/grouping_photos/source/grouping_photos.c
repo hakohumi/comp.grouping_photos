@@ -12,6 +12,7 @@
 int main() {
     int l_countLoop = 0;
     int l_countLoopBlock = 0;
+    int l_result = 1;               // 処理正常フラグ 正常：1 エラー：0
     char l_convFileName[13];
     char i_filePath[N];
     char i_fileName[N];
@@ -40,6 +41,9 @@ int main() {
         // 入力パス
 
         // 1つの写真ファイルの入力
+
+        // ファイルが存在するかどうか
+
         // 入力ファイルのファイル名取得
         strcpy(i_fileName, InputFile(i_filePath));
 
@@ -59,11 +63,15 @@ int main() {
 
         printf("o_filePath = %s\n", o_filePath);
 
+        // 出力先に同じ名前のファイルがないかどうか
+
         /* -------------------------------------------------- */
         // 出力ディレクトリへ写真ファイルのコピー
         /* -------------------------------------------------- */
 
-        MyCopyFile(i_filePath, o_filePath);
+        if (l_result == 1) {
+            MyCopyFile(i_filePath, o_filePath);
+        }
 
         /* -------------------------------------------------- */
 
