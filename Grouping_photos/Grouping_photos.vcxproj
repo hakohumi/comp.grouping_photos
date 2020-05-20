@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="grouping_photos\source\ControlFile.c" />
     <ClCompile Include="grouping_photos\source\GetFileInfo.c" />
     <ClCompile Include="grouping_photos\source\grouping_photos.c" />
-    <ClCompile Include="grouping_photos\source\InputFile.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="grouping_photos\header\ControlFile.h" />
