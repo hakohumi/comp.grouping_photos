@@ -12,7 +12,7 @@
 int main() {
     int l_countLoop = 0;
     int l_countLoopBlock = 0;
-    int l_result = 1;               // 処理正常フラグ 正常：1 エラー：0
+    int l_result = 1;  // 処理正常フラグ 正常：1 エラー：0
     char l_convFileName[13];
     char i_filePath[N];
     char i_fileName[N];
@@ -45,40 +45,52 @@ int main() {
         // ファイルが存在するかどうか
 
         // 入力ファイルのファイル名取得
-        strcpy(i_fileName, InputFile(i_filePath));
 
-        /* -------------------------------------------------- */
-        // ファイルのリネーム
-        /* -------------------------------------------------- */
+        if (GetFileName(i_filePath) == NULL) {
+            printf("入力されたファイルパスがおかしいです。\n");
+            l_result = 0;
+        } else {
+            strcpy(i_fileName, GetFileName(i_filePath));
+            // strcpy(i_fileName, InputDebugFunc(i_filePath));
 
-        getFileCreateTime(i_filePath, &l_convFileName);
+            /* -------------------------------------------------- */
+            // ファイルのリネーム
+            /* -------------------------------------------------- */
 
-        printf("変換後のファイル名 = %s\n", l_convFileName);
-        printf("変換後のファイル拡張子 = %s\n", strrchr(i_fileName, '.'));
+            GetFileCreatedTime(i_filePath, &l_convFileName);
 
-        // 出力ファイルパス 結合
-        strcat(o_filePath, l_convFileName);
-        sprintf_s(o_filePath, N, "%s\\%s%s", o_directoryPath, l_convFileName,
-                  strrchr(i_fileName, '.'));
+            printf("変換後のファイル名 = %s\n", l_convFileName);
+            printf("変換後のファイル拡張子 = %s\n", strrchr(i_fileName, '.'));
 
-        printf("o_filePath = %s\n", o_filePath);
+            // 出力ファイルパス 結合
+            strcat(o_filePath, l_convFileName);
+            sprintf_s(o_filePath, N, "%s\\%s%s", o_directoryPath,
+                      l_convFileName, strrchr(i_fileName, '.'));
 
-        // 出力先に同じ名前のファイルがないかどうか
+            printf("o_filePath = %s\n", o_filePath);
 
-        /* -------------------------------------------------- */
-        // 出力ディレクトリへ写真ファイルのコピー
-        /* -------------------------------------------------- */
+            // 出力先に同じ名前のファイルがないかどうか
 
-        if (l_result == 1) {
-            MyCopyFile(i_filePath, o_filePath);
+            /* -------------------------------------------------- */
+            // 出力ディレクトリへ写真ファイルのコピー
+            /* -------------------------------------------------- */
+
+            if (l_result == 1) {
+                MyCopyFile(i_filePath, o_filePath);
+            }
         }
 
+        /* -------------------------------------------------- */
+        // ループ開始 準備処理
         /* -------------------------------------------------- */
 
         memset(i_filePath, 0, N);
 
+        l_result = 1;
         printf("\n入力するファイルパスを入力してください\n");
         scanf_s("%s", &i_filePath, N);
+
+        /* -------------------------------------------------- */
     }
 
     // ファイルパスの構造化

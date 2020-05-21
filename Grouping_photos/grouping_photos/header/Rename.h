@@ -3,6 +3,6 @@
 
 typedef const char* FileName;
 
-void getFileCreateTime(FileName i_fileName, char* o_fileName);
+void GetFileCreatedTime(FileName i_fileName, char* o_fileName);
 
 #endif

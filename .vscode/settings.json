@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "controlfile.h": "c",
-        "directory.h": "c"
+        "directory.h": "c",
+        "rename.h": "c"
     }
 }

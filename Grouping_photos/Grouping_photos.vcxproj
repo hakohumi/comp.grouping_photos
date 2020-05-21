@@ -20,8 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="grouping_photos\copyfunc\ControlFile.c" />
+    <ClCompile Include="grouping_photos\renamefunc\Rename.c" />
     <ClCompile Include="grouping_photos\source\grouping_photos.c" />
-    <ClCompile Include="grouping_photos\source\Rename.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="grouping_photos\header\ControlFile.h" />

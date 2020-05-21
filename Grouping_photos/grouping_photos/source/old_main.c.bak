@@ -64,7 +64,7 @@
 //     } while (l_countLoopBlock > 0);
 
 //     // 1つの写真ファイルの入力
-//     // InputFile(i_fileName);
+//     // InputDebugFunc(i_fileName);
 
 //     // 出力ディレクトリへ写真ファイルのコピー
 //     // MyCopyFile(i_fileName, o_fileName);

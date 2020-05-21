@@ -3,10 +3,23 @@
 
 typedef const char* FileName;
 
-char* InputFile(FileName i_fileName);
+char* GetFileName(FileName i_fileName);
 void MyCopyFile(FileName i_fileName, FileName o_fileName);
+void StructuredPath(FileName i_fileName);  // 未実装
+
+/* -------------------------------------------------- */
+// static関数用プロトタイプ宣言
+/* -------------------------------------------------- */
+
 static int myGetFileSize(FileName i_fileName);
-void structured_path(FileName i_fileName);
-void getFileCreateTime(FileName i_fileName, char* o_fileName);
+static int copyFileFopen(FileName i_filePath, FileName o_filePath);
+
+/* -------------------------------------------------- */
+// Debug用 関数
+/* -------------------------------------------------- */
+
+char* InputDebugFunc(FileName i_fileName);
+
+/* -------------------------------------------------- */
 
 #endif

@@ -21,7 +21,7 @@
     <ClCompile Include="grouping_photos\copyfunc\ControlFile.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="grouping_photos\source\Rename.c">
+    <ClCompile Include="grouping_photos\renamefunc\Rename.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

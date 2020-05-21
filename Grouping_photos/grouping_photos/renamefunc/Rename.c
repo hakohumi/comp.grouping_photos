@@ -3,7 +3,7 @@
 #include <io.h>
 #include <time.h>
 
-void getFileCreateTime(FileName i_filePath, char *o_fileName) {
+void GetFileCreatedTime(FileName i_filePath, char *o_fileName) {
     struct _finddata_t l_fData;
     struct tm l_createTime;
     // char l_yearChar[5];
