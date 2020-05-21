@@ -49,7 +49,9 @@ int main() {
         if (GetFileName(i_filePath) == NULL) {
             printf("入力されたファイルパスがおかしいです。\n");
             l_result = 0;
-        } else {
+        }
+
+        if (l_result != 0) {
             strcpy(i_fileName, GetFileName(i_filePath));
             // strcpy(i_fileName, InputDebugFunc(i_filePath));
 
@@ -76,7 +78,7 @@ int main() {
             /* -------------------------------------------------- */
 
             if (l_result == 1) {
-                MyCopyFile(i_filePath, o_filePath);
+                                MyCopyFile(i_filePath, o_filePath);
             }
         }
 

@@ -38,11 +38,14 @@ void MyCopyFile(FileName i_filePath, FileName o_filePath) {
     // エラーだったら
     if (l_endFlag == FALSE) {
         printf("CopyFile() Copy error\n");
+    } else {
+        printf("CopyFile() Copy complate !");
     }
 
 #ifdef DEBUG
     printf("\nControlFile.CopyFile() end\n");
 #endif
+
     return;
 }
 
