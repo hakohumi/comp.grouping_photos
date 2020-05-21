@@ -112,8 +112,9 @@ static int copyFileFopen(FileName i_filePath, FileName o_filePath) {
     result = 1;
 
     l_errSrc = fopen_s(&l_src, i_filePath, "rb");
-    // 今回は、コピー先のファイルはないものとする
+
     l_errDest = fopen_s(&l_dest, o_filePath, "wb");
+    printf("l_errDest write = %d\n", l_errDest);
 
     if (l_dest == NULL) {
         printf("l_dest = null\n");
@@ -184,4 +185,18 @@ char *InputDebugFunc(FileName i_filePath) {
 #endif
 
     return GetFileName(i_filePath);
+}
+
+int existFile(const char *path) {
+    struct stat l_st;
+
+    printf("existFile() in\n");
+
+    if (stat(path, &l_st) != 0) {
+        return 0;
+    }
+
+    // ファイルかどうか
+    // S_ISREG(st.st_mode); の方がシンプルだが、Visual Studio では使えない。
+    return (l_st.st_mode & S_IFMT) == S_IFREG;
 }

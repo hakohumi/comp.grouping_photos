@@ -13,7 +13,7 @@ void StructuredPath(FileName i_fileName);  // 未実装
 
 static int myGetFileSize(FileName i_fileName);
 static int copyFileFopen(FileName i_filePath, FileName o_filePath);
-
+int existFile(const char *path);
 /* -------------------------------------------------- */
 // Debug用 関数
 /* -------------------------------------------------- */

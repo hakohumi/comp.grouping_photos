@@ -78,7 +78,32 @@ int main() {
             /* -------------------------------------------------- */
 
             if (l_result == 1) {
-                                MyCopyFile(i_filePath, o_filePath);
+                char *l_numChar;
+                char l_wkChar[4];
+                int l_numInt = 0;
+                for (;;) {
+                    if (existFile(o_filePath)) {
+                        printf("かぶり\n");
+                        l_numChar = strrchr(o_filePath, '_');
+                        printf("l_num = %s\n", l_numChar);
+                        l_numInt = atoi(l_numChar + 1);
+                        printf("l_numInt = %d\n", l_numInt);
+
+                        l_numInt++;
+                        sprintf_s(l_wkChar, 4, "%03d", l_numInt);
+
+                        *(l_numChar + 1) = *(l_wkChar);
+                        *(l_numChar + 2) = *(l_wkChar+1);
+                        *(l_numChar + 3) = *(l_wkChar+2);
+                        
+                        // strcpy_s((l_numChar + 1), 4, l_wkChar);
+                    } else {
+                        printf("かぶり なし\n");
+                        break;
+                    }
+                }
+
+                MyCopyFile(i_filePath, o_filePath);
             }
         }
 
