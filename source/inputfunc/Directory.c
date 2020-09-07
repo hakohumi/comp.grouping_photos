@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define DEBUG
-#define N 260
+#define FILE_NAME_MAX 260
 
 #define EXT_NUM 5
 #define EXT_LEN 5
@@ -19,21 +19,20 @@ int ScanFile(char* i_dir, int i_countFile, char* i_fileName) {
     struct _finddata_t l_fData;
     int fh;
     int l_countFile = 0;
-    char l_path[N];
+    char l_path[FILE_NAME_MAX];
 
     if ((i_fileName == NULL) && (i_countFile != NULL)) {
         return 0;
     }
 
-    sprintf_s(l_path, N, "%s/*.*", i_dir);
+    sprintf_s(l_path, FILE_NAME_MAX, "%s/*.*", i_dir);
     if ((fh = _findfirst(l_path, &l_fData)) == -1) return;
     do {
-        sprintf_s(l_path, N, "%s/%s", i_dir, l_fData.name);
+        sprintf_s(l_path, FILE_NAME_MAX, "%s/%s", i_dir, l_fData.name);
         if (l_fData.attrib & _A_SUBDIR) {  // ディレクトリ
-            if (strcmp(l_fData.name, ".") != 0 &&
-                strcmp(l_fData.name, "..") != 0) {
+            if (strcmp(l_fData.name, ".") != 0 && strcmp(l_fData.name, "..") != 0) {
                 l_countFile += ScanFile(l_path, i_countFile, i_fileName);
-            }  // カレントディレクトリと親ディレクトリは除外する
+            }     // カレントディレクトリと親ディレクトリは除外する
         } else {  // ファイル
             //もし、対象の拡張子を持ったファイルを見つけたら
             if (isCorrectExt(strrchr(l_fData.name, '.')) != 0) {
@@ -42,7 +41,7 @@ int ScanFile(char* i_dir, int i_countFile, char* i_fileName) {
                 if (i_countFile != NULL) {
                     // 指定回数分検索し終えたら、
                     if (l_countFile == i_countFile) {
-                        sprintf_s(i_fileName, N, "%s/%s", i_dir, l_fData.name);
+                        sprintf_s(i_fileName, FILE_NAME_MAX, "%s/%s", i_dir, l_fData.name);
                         printf("見つけた！\n");
                         return l_countFile;
                     }
@@ -62,14 +61,14 @@ int ScanFile(char* i_dir, int i_countFile, char* i_fileName) {
 //     struct _finddata_t l_fData;
 //     int fh;
 //     int l_count;
-//     char l_path[N];
+//     char l_path[FILE_NAME_MAX];
 
 //     l_count = 0;
 
-//     sprintf_s(l_path, N, "%s/*.*", i_dir);
+//     sprintf_s(l_path, FILE_NAME_MAX, "%s/*.*", i_dir);
 //     if ((fh = _findfirst(l_path, &l_fData)) == -1) return -1;
 //     do {
-//         sprintf_s(l_path, N, "%s/%s", i_dir, l_fData.name);
+//         sprintf_s(l_path, FILE_NAME_MAX, "%s/%s", i_dir, l_fData.name);
 //         if (l_fData.attrib & _A_SUBDIR) {  // ディレクトリ
 //             if (strcmp(l_fData.name, ".") != 0 &&
 //                 strcmp(l_fData.name, "..") != 0) {

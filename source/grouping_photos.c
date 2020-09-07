@@ -6,7 +6,7 @@
 
 // https://programming.pc-note.net/c/file7.html
 
-#define N 260
+#define FILE_NAME_MAX 260
 #define CONV_NUM 100
 
 int main() {
@@ -14,10 +14,10 @@ int main() {
     int l_countLoopBlock = 0;
     FileName i_fileName = "grouping_photos/resource/in_test.txt";
     FileName o_fileName = "grouping_photos/resource/in_test2.txt";
-    char l_fileName[N];
+    char l_fileName[FILE_NAME_MAX];
     char *l_filePath[CONV_NUM];
 
-    memset(l_fileName, 0, N);
+    memset(l_fileName, 0, FILE_NAME_MAX);
     memset(l_filePath, 0, sizeof(l_filePath));
 
     printf("group_photo start\n");
@@ -28,12 +28,11 @@ int main() {
     printf("num = %d\n", l_countLoop);
 
     // テスト
-    printf("ScanFile() = %d\n",
-           ScanFile("C:/Users/fuminori.hakoishi/Desktop", 2, &l_fileName));
+    printf("ScanFile() = %d\n", ScanFile("C:/Users/fuminori.hakoishi/Desktop", 2, &l_fileName));
     printf("scan filepath = %s i = %d\n", l_fileName, l_countLoop);
 
+    // ファイル100個単位で何ブロック分あるか
     if (l_countLoop > 100) {
-        // ファイル100個単位で何ブロック分あるか
         l_countLoopBlock = (int)(l_countLoop / 100);
         l_countLoop %= 100;
     }
